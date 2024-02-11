@@ -24,6 +24,3 @@ users = Table(
     Column("created", TIMESTAMP, default=datetime.utcnow),
     Column("role_id", Integer, ForeignKey("roles.id")),
 )
-
-engine = sqlalchemy.create_engine()
-metadata.create_all()

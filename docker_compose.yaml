@@ -1,0 +1,47 @@
+version: '3.1'
+services:
+
+#  arango:
+#    hostname: arango
+#    container_name: arango
+#    image: arangodb/arangodb:3.1.1
+#    volumes:
+#      - avocado:/var/lib/arangodb
+#    ports:
+#      - "8529:8529"
+#    environment:
+#      - ARANGO_ROOT_PASSWORD=ronin
+#    networks:
+#      - postgres_adminer
+
+
+  postgres:
+    image: postgres:13.3
+    container_name: postgres_fs
+    hostname: postgres
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "admin"
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres_adminer
+    volumes:
+      - postgres:/data
+
+  adminer:
+    container_name: adminer_watcher
+    hostname: adminer
+    image: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - postgres_adminer
+
+volumes:
+  postgres:
+
+
+networks:
+  postgres_adminer:
+    driver: bridge
